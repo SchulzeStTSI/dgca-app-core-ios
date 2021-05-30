@@ -26,12 +26,13 @@
 
 import Foundation
 import SwiftCBOR
+import CBORDecoder
 
 let coseTag = UInt64(18)
 
 public struct COSE {
   public static func verify(_ cborData: Data, with xHex: String, and yHex: String) -> Bool {
-    let decoder = SwiftCBOR.CBORDecoder(input: cborData.uint)
+    let decoder = CBORDecoder(input: cborData.uint)
 
     guard let cbor = try? decoder.decodeItem() else {
       return false
@@ -39,7 +40,7 @@ public struct COSE {
     return verify(cbor, with: xHex, and: yHex)
   }
   public static func verify(_ cborData: Data, with rsa: String) -> Bool {
-    let decoder = SwiftCBOR.CBORDecoder(input: cborData.uint)
+    let decoder = CBORDecoder(input: cborData.uint)
 
     guard let cbor = try? decoder.decodeItem() else {
       return false
