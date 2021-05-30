@@ -26,6 +26,7 @@
 
 import Foundation
 import SwiftCBOR
+import CBORDecoder
 
 struct UnwrappedCBOR {
   let payload: SwiftCBOR.CBOR
@@ -35,7 +36,7 @@ struct UnwrappedCBOR {
 
 public struct CBOR {
   static func unwrap(data: Data) -> UnwrappedCBOR? {
-    let decoder = SwiftCBOR.CBORDecoder(input: data.uint)
+    let decoder = CBORDecoder(input: data.uint)
 
     guard
       let cbor = try? decoder.decodeItem(),
@@ -82,7 +83,7 @@ public struct CBOR {
   }
 
   public static func hash(from cborData: Data) -> String {
-    let decoder = SwiftCBOR.CBORDecoder(input: cborData.uint)
+    let decoder = CBORDecoder(input: cborData.uint)
 
     guard
       let cbor = try? decoder.decodeItem(),
